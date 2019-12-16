@@ -15,4 +15,6 @@ https://github.com/choongmun/Infrastructure-Automation
 
 Attack Automation
 ---------------
-https://github.com/xxgrezxx/Attack-Automation
+Objective
+* Use Python3 to run metasploit for less limitation 
+* Able to run a produce script from python to automatically emulate an attack
