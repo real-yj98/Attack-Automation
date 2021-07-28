@@ -13,7 +13,7 @@ def init(client, ip ='', lhost = '', time_out_sec = 300):
                 #print(c)
                 print("{}]".format(id),"IP: {}".format(c.get('session_host')),"| {}".format(c.get('desc')),"{}".format(c.get('arch')))
                 shell = client.sessions.session(id)
-                if c.get('desc') is not "meterpreter":
+                if c.get('desc') != "meterpreter":
                     while True: # this waits until shell is usable
                         shell.write('getpid\n')
                         sleep(5)

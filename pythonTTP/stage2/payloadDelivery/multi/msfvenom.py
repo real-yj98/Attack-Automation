@@ -28,7 +28,7 @@ def init(client):
             fail = snippet.split('Exploit failed: ')
         x+=1
     if(len(fail)>1):
-        handler = "Handler failed to start..Is there a server using port {}?".format(httpspl['LHOST'])
+        handler = "Handler failed to start...Is there a server using port {}?".format(httpspl['LPORT'])
     else:
         handler = "Handler started successfully"
     print("[+] " + handler)
