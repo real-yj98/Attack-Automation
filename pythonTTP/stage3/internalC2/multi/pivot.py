@@ -2,9 +2,11 @@ from library.pymetasploit3.msfrpc import MsfRpcClient
 
 
 def init(client,sid):
-    cid = client.consoles.console().cid
     post = client.modules.use('post', 'multi/manage/autoroute')
+    print(sid)
     post['SESSION'] = int(sid)
+    post['SUBNET'] = '10.10.10.0/24'
+    cid = client.consoles.console().cid
     output = (client.consoles.console(cid).run_module_with_output(post).split('['))
     x=1
     while x < len(output):
@@ -22,7 +24,7 @@ if __name__ == '__main__':
         exit()
     for id,c in client.sessions.list.items():
         print("{})".format(id),"IP: {}".format(c.get('session_host')),"| {}".format(c.get('desc')),"{}".format(c.get('arch')))
-    print("---------------------------------")
+    #print("---------------------------------")
     sid = input()
-    print("--------------------------------- \n")
+    #print("--------------------------------- \n")
     init(client,sid)

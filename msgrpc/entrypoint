@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /usr/src/metasploit-framework
+./msfconsole -q -r msgrpc.rc

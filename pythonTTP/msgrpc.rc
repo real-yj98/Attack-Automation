@@ -1,1 +1,2 @@
-load msgrpc Pass=123
+db_connect postgres://postgres@db:5432/msf
+load msgrpc ServerHost=0.0.0.0 Pass=123

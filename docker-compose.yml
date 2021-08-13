@@ -1,0 +1,54 @@
+version: '3'
+services:
+    db:
+        image: postgres:10-alpine
+        container_name: postgres
+        environment:
+            POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+            - 5432:5432
+
+    msgrpc:
+        image: metasploitframework/metasploit-framework:latest
+        container_name: msgrpc
+        environment:
+            DATABASE_URL: postgres://postgres@db:5432/msf
+        depends_on: 
+            - db
+        links:
+            - db
+        tty: true
+        entrypoint: /entrypoint
+        ports:
+            - 443:443
+            - 55552:55552
+        volumes:
+            - $HOME/.msf4:/home/msf/.msf4
+            - ./pythonTTP/msgrpc.rc:/usr/src/metasploit-framework/msgrpc.rc
+            - ./msgrpc/entrypoint:/entrypoint
+
+    caddy:
+        image: caddy
+        container_name: caddy
+        ports:
+            - 80:80
+        volumes:
+            - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+            - ./filetransfer:/var/www/filetransfer
+
+    pythonttp:
+        build: .
+        container_name: pythonTTP
+        entrypoint: /entrypoint
+        volumes:
+            - $HOME/.msf4:/home/msf/.msf4 
+            - ./pythonTTP:/opt/pythonTTP
+            - ./filetransfer:/opt/filetransfer
+            - ./pythonttp/entrypoint:/entrypoint
+        environment: 
+            - HOST_IP=192.168.1.8
+            - MSGRPC_IP=172.18.0.4
+        depends_on:
+            - msgrpc
+            - db
+            - caddy

@@ -10,7 +10,6 @@ def init(client, ip ='', lhost = '', time_out_sec = 300):
     while time_out_sec > 0:
         for id,c in client.sessions.list.items():
             if (c.get('session_host') == ip) or (c.get('tunnel_local') == lhost):
-                #print(c)
                 print("{})".format(id),"IP: {}".format(c.get('session_host')),"| {}".format(c.get('desc')),"{}".format(c.get('arch')))
                 shell = client.sessions.session(id)
                 if c.get('desc') != "meterpreter":

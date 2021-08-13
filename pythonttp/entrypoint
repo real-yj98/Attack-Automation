@@ -1,0 +1,10 @@
+#!/bin/bash
+
+export TERM=xterm
+
+# Run script
+cd /opt/pythonTTP
+python3 yjmain.py
+
+# To keep container running forever
+# tail -f /dev/null

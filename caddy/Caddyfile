@@ -1,0 +1,4 @@
+http:// {
+    root * /var/www/filetransfer
+    file_server browse
+}
