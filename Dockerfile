@@ -25,11 +25,6 @@ RUN apt-get -qq update \
   && git checkout $latestTag \
   && rm Gemfile.lock \
   && bundle install \
-  && apt-get -y remove --purge build-essential patch ruby-dev zlib1g-dev liblzma-dev git autoconf build-essential libpcap-dev libpq-dev libsqlite3-dev \
-  dialog apt-utils \
-  && apt-get -y autoremove \
-  && apt-get -y clean \
-  && rm -rf /var/lib/apt/lists/* \
   # Need to create symbolic link if not unicorn will not work
   && ln -s /opt/metasploit-framework/* /usr/local/bin
 
