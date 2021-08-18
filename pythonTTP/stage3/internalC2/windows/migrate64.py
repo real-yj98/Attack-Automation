@@ -8,7 +8,7 @@ def init(client,sid):
     success = ''
     print("[*] Starting migration...")
     for line in session.read().split("\n"):
-        print(line)
+        # print(line)
         if "explorer" in line:
             explorer = line.split(" ")
             pid = explorer[1]

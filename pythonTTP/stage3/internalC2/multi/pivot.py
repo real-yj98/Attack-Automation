@@ -3,7 +3,7 @@ from library.pymetasploit3.msfrpc import MsfRpcClient
 
 def init(client,sid):
     post = client.modules.use('post', 'multi/manage/autoroute')
-    print(sid)
+    # print(sid)
     post['SESSION'] = int(sid)
     post['SUBNET'] = '10.10.10.0/24'
     cid = client.consoles.console().cid
