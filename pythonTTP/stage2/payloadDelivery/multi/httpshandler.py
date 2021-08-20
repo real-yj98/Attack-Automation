@@ -29,5 +29,5 @@ def init(client):
     print(handler)
 
 if __name__ == '__main__':
-    client = MsfRpcClient("123",server='172.18.0.4',port=55552)
+    client = MsfRpcClient("123",server='172.22.0.4',port=55552)
     start=init(client)

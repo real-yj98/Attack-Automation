@@ -10,7 +10,7 @@ import subprocess
 
 # Declare variables
 HOST_IP='192.168.1.8'
-MSGRPC_IP='172.19.0.4'
+MSGRPC_IP='172.22.0.4'
 
 client = MsfRpcClient("123",server=MSGRPC_IP,port=55552)
 

@@ -10,7 +10,7 @@ def init(client,sid):
         print(line)
 
 if __name__ == '__main__':
-    client = MsfRpcClient("123",server='172.18.0.4',port=55552)
+    client = MsfRpcClient("123",server='172.22.0.4',port=55552)
     print("Select sessions to proceed: \n")
     if len(client.sessions.list.items())<1 :
         print("There are no sessions available")
