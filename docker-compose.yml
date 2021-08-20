@@ -7,6 +7,8 @@ services:
             POSTGRES_HOST_AUTH_METHOD: trust
         ports:
             - 5432:5432
+        networks:
+            - default
 
     msgrpc:
         image: metasploitframework/metasploit-framework:latest
@@ -26,6 +28,8 @@ services:
             - $HOME/.msf4:/home/msf/.msf4
             - ./pythonTTP/msgrpc.rc:/usr/src/metasploit-framework/msgrpc.rc
             - ./msgrpc/entrypoint:/entrypoint
+        networks:
+            - default
 
     caddy:
         image: caddy
@@ -35,6 +39,8 @@ services:
         volumes:
             - ./caddy/Caddyfile:/etc/caddy/Caddyfile
             - ./filetransfer:/var/www/filetransfer
+        networks:
+            - default
 
     pythonttp:
         build: .
@@ -47,9 +53,15 @@ services:
             - ./pythonttp/entrypoint:/entrypoint
         environment: 
             - HOST_IP=192.168.1.8
-            - MSGRPC_IP=172.18.0.4
+            - MSGRPC_IP=172.19.0.4
         tty: true
         depends_on:
             - msgrpc
             - db
             - caddy
+        networks:
+            - default
+
+networks:
+    default:
+        driver: bridge
